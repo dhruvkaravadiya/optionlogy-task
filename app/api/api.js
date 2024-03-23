@@ -46,7 +46,7 @@ export const getIndicatorData = async (symbol, indicator) => {
     symbol = "IBM";
     indicator = "SMA";
     const response = await axios.get(
-        `https://www.alphavantage.co/query?function=${indicator}&symbol=${symbol}&interval=daily&time_period=10&series_type=open&outputsize=compact&apikey=NLZFFZX4METI0V6H`
+        `https://www.alphavantage.co/query?function=${indicator}&symbol=${symbol}&interval=daily&time_period=10&series_type=open&outputsize=compact&apikey=${ALPHAVANTAGE_API_KEY}`
     );
     //console.log(response.data.length + "response.data.length");
     const smaData = smaIndicatorData["Technical Analysis: SMA"];
