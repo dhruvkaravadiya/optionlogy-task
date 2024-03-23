@@ -11,7 +11,6 @@ const InfoCard = ({ title, data }) => {
                 <thead className="bg-slate-300">
                     <tr>
                         {Object.keys(data[0]).map((key) => {
-                            // Remove the numbering from the keys
                             const trimmedKey = key.replace(/^\d+\. /, "");
                             return (
                                 <th

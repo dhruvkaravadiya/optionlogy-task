@@ -10,7 +10,7 @@ export const SearchBar = () => {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
-    const dispatch = useDispatch(); // Get the dispatch function from react-redux
+    const dispatch = useDispatch();
 
     const handleSearch = () => {
         const params = new URLSearchParams(searchParams);

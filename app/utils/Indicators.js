@@ -3,7 +3,6 @@ export const calculateRSI = (data) => {
     const rsiValues = [];
     for (let i = 0; i < data.length; i++) {
         if (i >= 13) {
-            // RSI requires at least 14 days of data
             const closePrices = data
                 .slice(i - 13, i + 1)
                 .map((item) => parseFloat(item["4. close"]));
@@ -25,7 +24,7 @@ export const calculateRSI = (data) => {
             const rsi = 100 - 100 / (1 + rs);
             rsiValues.push(rsi);
         } else {
-            rsiValues.push(null); // Placeholder for incomplete data
+            rsiValues.push(null);
         }
     }
     return rsiValues;
@@ -36,7 +35,6 @@ export const calculateADX = (data) => {
     const adxValues = [];
     for (let i = 0; i < data.length; i++) {
         if (i >= 13) {
-            // ADX requires at least 14 days of data
             const trueRangeValues = [];
             const directionalMovement = [];
             for (let j = i - 13; j < i; j++) {
@@ -76,17 +74,15 @@ export const calculateADX = (data) => {
                 ) * 100;
             adxValues.push(dx);
         } else {
-            adxValues.push(null); // Placeholder for incomplete data
+            adxValues.push(null);
         }
     }
     return adxValues;
 };
-// Function to calculate Aroon
 export const calculateAroon = (data) => {
     const aroonValues = [];
     for (let i = 0; i < data.length; i++) {
         if (i >= 25) {
-            // Aroon requires at least 25 days of data
             const startIndex = i - 25;
             const highValues = data
                 .slice(startIndex, i + 1)
@@ -96,11 +92,11 @@ export const calculateAroon = (data) => {
                 .map((item) => parseFloat(item["3. low"]));
             const highIndex = highValues.indexOf(Math.max(...highValues));
             const lowIndex = lowValues.indexOf(Math.min(...lowValues));
-            const highAroon = ((25 - (i - startIndex - highIndex)) / 25) * 100; // Calculate High Aroon
-            const lowAroon = ((25 - (i - startIndex - lowIndex)) / 25) * 100; // Calculate Low Aroon
+            const highAroon = ((25 - (i - startIndex - highIndex)) / 25) * 100;
+            const lowAroon = ((25 - (i - startIndex - lowIndex)) / 25) * 100;
             aroonValues.push({ high: highAroon, low: lowAroon });
         } else {
-            aroonValues.push({ high: null, low: null }); // Placeholder for incomplete data
+            aroonValues.push({ high: null, low: null });
         }
     }
     return aroonValues;
@@ -108,11 +104,11 @@ export const calculateAroon = (data) => {
 export const calculateSMA = (data) => {
     const smaValues = [];
     for (let i = 0; i < data.length; i++) {
-        const startIndex = Math.max(0, i - 29); // Considering last 30 days
+        const startIndex = Math.max(0, i - 29);
         const sum = data
             .slice(startIndex, i + 1)
             .reduce((acc, item) => acc + parseFloat(item["4. close"]), 0);
-        smaValues.push(sum / Math.min(i + 1, 30)); // Calculate SMA
+        smaValues.push(sum / Math.min(i + 1, 30));
     }
     return smaValues;
 };

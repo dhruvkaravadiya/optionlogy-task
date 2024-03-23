@@ -11,7 +11,6 @@ export function ChartComponent({ data }) {
     const [Chart, setChart] = useState(null);
 
     useEffect(() => {
-        // Import react-apexcharts dynamically only on the client-side
         import("react-apexcharts").then((module) => {
             setChart(() => module.default);
         });
@@ -34,7 +33,6 @@ export function ChartComponent({ data }) {
     const formatIndicatorData = () => {
         if (!stateData || stateData.length === 0) return [];
 
-        // Process data for each indicator
         return stateData.flatMap((indicator) => {
             return indicator.indicatorData.map((item) => ({
                 x: new Date(item.date).getTime(),

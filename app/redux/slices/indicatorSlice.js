@@ -10,7 +10,6 @@ export const removeIndicatorDataThunk = createAsyncThunk(
     "indicators/removeIndicatorData",
     async ({ symbol, indicator }, { dispatch, getState }) => {
         try {
-            // Remove the indicator data from the state
             dispatch(removeIndicator(indicator));
             dispatch(removeIndicatorData({ indicator }));
         } catch (error) {
@@ -27,15 +26,13 @@ export const fetchIndicatorData = createAsyncThunk(
             const indicatorData = await getIndicatorData(symbol, indicator);
             console.log("fetchIndicatorData " + JSON.stringify(indicatorData));
 
-            // Update the state directly by dispatching actions
-            dispatch(addIndicator(indicator)); // Example action dispatch
+            dispatch(addIndicator(indicator));
             dispatch(
                 addIndicatorData({
                     indicator: indicator,
                     indicatorData: indicatorData,
                 })
-            ); // Example action dispatch
-            // You can dispatch any other actions as needed
+            );
             console.log("Indicator Data: ", indicatorData);
             return indicatorData;
         } catch (error) {
@@ -65,7 +62,6 @@ export const indicatorsSlice = createSlice({
                 (data) => data.indicator !== action.payload.indicator
             );
         },
-        // Action to clear all selected indicators
         clearIndicators: (state) => {
             state.selectedIndicators = [];
             state.selectedIndicatorData = [];
@@ -73,7 +69,6 @@ export const indicatorsSlice = createSlice({
     },
 });
 
-// Export action creators and reducer
 export const {
     addIndicator,
     addIndicatorData,

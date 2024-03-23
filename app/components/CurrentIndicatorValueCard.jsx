@@ -3,12 +3,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const CurrentIndicatorValueCard = () => {
-    // Get the selected indicator data from Redux state
     const indicator = useSelector(
         (state) => state.indicators.selectedIndicatorData
     );
 
-    // Render placeholder blocks if indicator data is empty or null
     if (!indicator || indicator.length === 0) {
         return (
             <div className="bg-white rounded-md p-4 shadow-md text-black">
@@ -18,7 +16,6 @@ const CurrentIndicatorValueCard = () => {
         );
     }
 
-    // Render the card with the indicator values
     return (
         <div className="bg-white rounded-md p-4 shadow-md text-black">
             <h2 className="font-bold text-lg mb-4">Indicators</h2>
