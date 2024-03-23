@@ -6,6 +6,10 @@ const CurrentIndicatorValueCard = () => {
     const indicator = useSelector(
         (state) => state.indicators.selectedIndicatorData
     );
+    const sortedData = indicator[0].indicatorData
+        .slice()
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
+    const latestData = sortedData[0];
 
     if (!indicator || indicator.length === 0) {
         return (
@@ -15,7 +19,6 @@ const CurrentIndicatorValueCard = () => {
             </div>
         );
     }
-
     return (
         <div className="bg-white rounded-md p-4 shadow-md text-black">
             <h2 className="font-bold text-lg mb-4">Indicators</h2>
@@ -30,7 +33,7 @@ const CurrentIndicatorValueCard = () => {
                                 {item.indicator}
                             </th>
                             <td className="py-2 px-4 border">
-                                {item.indicatorData[0]?.sma || "-"}
+                                {latestData.sma || "-"}
                             </td>
                         </tr>
                     ))}
