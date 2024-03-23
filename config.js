@@ -1,0 +1,1 @@
+export const ALPHAVANTAGE_API_KEY = process.env.ALPHAVANTAGE_API_KEY;
