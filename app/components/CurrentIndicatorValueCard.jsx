@@ -4,21 +4,29 @@ import { useSelector } from "react-redux";
 
 const CurrentIndicatorValueCard = () => {
     const indicator = useSelector(
-        (state) => state.indicators.selectedIndicatorData
+        (state) => state.indicators?.selectedIndicatorData
     );
-    const sortedData = indicator[0].indicatorData
-        .slice()
-        .sort((a, b) => new Date(b.date) - new Date(a.date));
-    const latestData = sortedData[0];
 
+    // Check if indicator is null or an empty array
     if (!indicator || indicator.length === 0) {
         return (
             <div className="bg-white rounded-md p-4 shadow-md text-black">
                 <h2 className="font-bold text-lg mb-4">Indicators</h2>
-                <h3>No Inticators Selected</h3>
+                <h3>No Indicators Selected</h3>
             </div>
         );
     }
+
+    // Access the first element of indicator only if it exists
+    const sortedData = indicator[0]?.indicatorData
+        ? indicator[0].indicatorData
+              .slice()
+              .sort((a, b) => new Date(b.date) - new Date(a.date))
+        : [];
+
+    // Check if sortedData has any elements before accessing its properties
+    const smaValue = sortedData.length > 0 ? sortedData[0].sma : null;
+
     return (
         <div className="bg-white rounded-md p-4 shadow-md text-black">
             <h2 className="font-bold text-lg mb-4">Indicators</h2>
@@ -33,7 +41,7 @@ const CurrentIndicatorValueCard = () => {
                                 {item.indicator}
                             </th>
                             <td className="py-2 px-4 border">
-                                {latestData.sma || "-"}
+                                {smaValue || "-"}
                             </td>
                         </tr>
                     ))}

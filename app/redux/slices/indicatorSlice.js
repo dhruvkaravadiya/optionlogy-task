@@ -24,7 +24,6 @@ export const fetchIndicatorData = createAsyncThunk(
     async ({ symbol, indicator }, { dispatch, getState }) => {
         try {
             const indicatorData = await getIndicatorData(symbol, indicator);
-            console.log("fetchIndicatorData " + JSON.stringify(indicatorData));
 
             dispatch(addIndicator(indicator));
             dispatch(
@@ -33,7 +32,6 @@ export const fetchIndicatorData = createAsyncThunk(
                     indicatorData: indicatorData,
                 })
             );
-            console.log("Indicator Data: ", indicatorData);
             return indicatorData;
         } catch (error) {
             console.error("Error fetching indicator data: ", error);
